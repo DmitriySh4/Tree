@@ -1,12 +1,13 @@
 <?php
 	ini_set('display_errors', 1);
 	require_once '../Models/Tree.php';
+	require_once '../Controllers/Controller.php';
 	
 	/**
 	 * 
 	 */
 	
-	class TreeController
+	class TreeController extends Controller
 	{
 		public function __construct()
 		{
@@ -58,5 +59,4 @@
 		$tree = new TreeController();
 		$tree->UpdateRoot($_POST['textEdit'], $_POST['edit_id']);
 	}
-	
 ?>
