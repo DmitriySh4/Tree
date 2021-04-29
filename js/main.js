@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$.ajax({
-		url: "../php/tree.php",
+		url: "../Controllers/TreeController.php",
 		type: "GET",
 		data: { getRoots : true},
 		// dataType: "json",
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	$('.root').click(function() {
 	  $.ajax({
         type: 'POST',
-        url: '../php/tree.php',
+        url: '../Controllers/TreeController.php',
         data: { text: "Root", position: 1, parents: [0] },
         success: function(response) {
             $('.root').hide();
@@ -33,7 +33,7 @@ $(document).ready(function(){
 	  	if (parents != 0) {
 		  $.ajax({
 	        type: 'POST',
-	        url: '../php/tree.php',
+	        url: '../Controllers/TreeController.php',
 	        data: {delete_id: del_id},
 	        success: function(response) {
 	            $('div[data-src="'+del_id+'"]').remove();
@@ -83,7 +83,7 @@ function add_root(pos, parents, parent_id) {
 
 	  $.ajax({
         type: 'POST',
-        url: '../php/tree.php',
+        url: '../Controllers/TreeController.php',
         data: { text: text, position: newpos, parents: parents },
         success: function(response) {
         	$( '<div class="branch" data-src="'+response+'" position="'+newpos+'" parent="'+parents+'"><button class="delete btn btn-danger">-</button><button class="btn btn-light edit">' + text + '</button><button class="add btn btn-success">+</button></div>').insertAfter('.branch[data-src='+parent_id+']').css('margin-left', +newpos*20);
@@ -104,7 +104,7 @@ function edit_root(id) {
 		$(modal).remove();
 	  $.ajax({
         type: 'POST',
-        url: '../php/tree.php',
+        url: '../Controllers/TreeController.php',
         data: { textEdit: text, edit_id: id },
         success: function(response) {
         	$('.branch[data-src="'+response+'"] .edit').text(text);
@@ -134,7 +134,7 @@ function delete_root(id, parents) {
 		$(modal).modal('hide');
 		$.ajax({
 	        type: 'POST',
-	        url: '../php/tree.php',
+	        url: '../Controllers/TreeController.php',
 	        data: {delete_id: id},
 	        success: function(response) {
             	$('.branch').remove();
